@@ -99,12 +99,7 @@ public func test(canisterId : Principal) : async TestResult {
     sub : (Int) -> async Int;
      }= actor (Principal.toText(canisterId));
 
-    try {
-      let resetTest = await calculator.reset() ;
-      if (resetTest != 0) {
-        return #err(#UnexpectedValue("Expected value of reset does not match"));
-      };
-
+    try {  
       let addTest = await calculator.add(1);
       if (addTest !=1){
          return #err(#UnexpectedValue("Expected value of add does not match"));
@@ -113,6 +108,11 @@ public func test(canisterId : Principal) : async TestResult {
       let subTest = await calculator.sub(2);
       if (subTest !=-1){
          return #err(#UnexpectedValue("Expected value of sub does not match"));
+      };
+      
+        let resetTest = await calculator.reset() ;
+      if (resetTest != 0) {
+        return #err(#UnexpectedValue("Expected value of reset does not match"));
       };
 
       return #ok();
